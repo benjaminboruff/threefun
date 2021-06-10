@@ -31,7 +31,38 @@ scene.add(camera); // Start the renderer
 
 renderer.setSize(WIDTH, HEIGHT); // Attach to DOM body
 
-document.body.appendChild(renderer.domElement);
+document.body.appendChild(renderer.domElement); // Make a sphere
+
+var RADIUS = 50;
+var SEGMENTS = 16;
+var RINGS = 16; // Create the sphere's Material
+
+var sphereMaterial = new three__WEBPACK_IMPORTED_MODULE_1__.MeshLambertMaterial({
+  color: 0xCC0000
+}); // Create a new mesh with sphere geometry
+
+var sphere = new three__WEBPACK_IMPORTED_MODULE_1__.Mesh(new three__WEBPACK_IMPORTED_MODULE_1__.SphereGeometry(RADIUS, SEGMENTS, RINGS), sphereMaterial); // Move sphere back in z so we can see it
+
+sphere.position.z = -300;
+scene.add(sphere); // create a point light
+
+var pointLight = new three__WEBPACK_IMPORTED_MODULE_1__.PointLight(0xFFFFFF); // set its position
+
+pointLight.position.x = 10;
+pointLight.position.y = 50;
+pointLight.position.z = 130; // add to the scene
+
+scene.add(pointLight);
+
+function update() {
+  // draw!
+  renderer.render(scene, camera); // Schedule the next frame.
+
+  requestAnimationFrame(update);
+} // Schedule the first frame.
+
+
+requestAnimationFrame(update);
 
 /***/ }),
 
